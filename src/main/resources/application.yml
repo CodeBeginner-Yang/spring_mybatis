@@ -1,0 +1,45 @@
+
+spring:
+  datasource:
+    username: root
+    password: 123456
+    type: com.mchange.v2.c3p0.ComboPooledDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/testdb
+  #热部署配置
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+      #解决项目自动编译后接口404
+      poll-interval: 3000
+      quiet-period: 1000
+
+
+
+
+server:
+  servlet:
+    context-path: /sm
+  port: 8001
+
+#mybatis\u7684\u76F8\u5173\u914D\u7F6E
+mybatis:
+  #mapper\u914D\u7F6E\u6587\u4EF6
+  mapper-locations: classpath:/mappers/*.xml
+  type-aliases-package: com.example.spring_mybatis.po
+  #\u5F00\u542F\u9A7C\u5CF0\u547D\u540D
+  configuration:
+    map-underscore-to-camel-case: true
+
+pagehelper:
+  helper-dialect: mysql
+
+logging:
+  level:
+    com:
+      example:
+        spring_mybatis:
+          dao: debug
+
+

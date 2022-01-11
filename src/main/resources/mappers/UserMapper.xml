@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.spring_mybatis.dao.UserMapper">
+    <select id="getUserByName" parameterType="string" resultMap="userMap">
+        select id,userName,upwd from tb_user where userName=#{username};
+    </select>
+
+    <resultMap id="userMap" type="com.example.spring_mybatis.po.User">
+
+    </resultMap>
+
+    <select id="selectAllByParams" resultType="com.example.spring_mybatis.po.User">
+        select *
+        from
+            tb_user
+        <where>
+            <if test="null != userName and userName!=''">
+                and userName like concat('%',#{userName},'%')
+            </if>
+        </where>
+
+    </select>
+</mapper>
